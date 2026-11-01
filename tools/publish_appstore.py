@@ -1,21 +1,26 @@
 #!/usr/bin/env python3
 """Publish verified App Store assets first and atomically replace the catalog last.
 Requires AWS CLI v2; infrastructure is defined in infra/appstore/stack.json.
-With --os, also an OS update (tools/mkota.py, docs/os/OTA.md): os/glaze-V.gzu,
-then os/catalog.txt.
+With --os, also an OS update (glaze-os's tools/mkota.py, docs/os/OTA.md):
+os/glaze-V.gzu, then os/catalog.txt. The catalog format comes from glaze-os's
+tools/mkstore.py, in the sibling checkout (GLAZE_DIR, default ../glaze-os).
 """
 import argparse
 import hashlib
 import json
+import os
 import re
 import struct
 import subprocess
+import sys
 import tempfile
 from pathlib import Path
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 
-import mkstore
+GLAZE = Path(os.environ.get('GLAZE_DIR', Path(__file__).resolve().parents[2] / 'glaze-os')).resolve()
+sys.path.insert(0, str(GLAZE / 'tools'))
+import mkstore  # noqa: E402
 
 ASSET_CACHE = 'public, max-age=31536000, immutable'
 CATALOG_CACHE = 'no-cache, max-age=0, must-revalidate'

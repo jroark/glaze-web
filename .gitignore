@@ -1,0 +1,8 @@
+out/
+.DS_Store
+__pycache__/
+
+# Built release archives and installers; metadata and checksums stay tracked.
+/site/downloads/*.zip
+/site/downloads/*.exe
+/site/downloads/*.dmg

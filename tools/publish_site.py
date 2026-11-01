@@ -41,6 +41,10 @@ def check_site(directory):
     for name in REQUIRED:
         if not (directory / name).is_file():
             raise SystemExit(f'site/{name} is missing (images come from tools/mksite.py)')
+    # Repository notes (README.md, CLAUDE.md) belong beside site/, never on the web.
+    notes = sorted(p.relative_to(directory).as_posix() for p in directory.rglob('*.md'))
+    if notes:
+        raise SystemExit(f'site/ must not contain Markdown files: {", ".join(notes)}')
     release = release_info(directory)
     if release:
         archive = directory / 'downloads' / release['filename']

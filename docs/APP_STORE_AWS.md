@@ -90,10 +90,11 @@ Keep the ACM validation CNAME in place for automatic certificate renewal.
 
 ## Publish a release
 
-Build the catalog, validate it locally, then publish:
+Build every package (`./build.sh` in glaze-os, glaze-apps and glaze-emulators),
+then build the catalog here, validate it locally, and publish:
 
 ```
-./build.sh store
+make store
 python3 tools/publish_appstore.py --dry-run
 python3 tools/publish_appstore.py --profile linux4be
 ```
@@ -135,7 +136,7 @@ backend, without a separate web storefront.
 ## Native verification
 
 The normal OS build already uses `https://appstore.glaze-os.com`. Boot a copy of
-`out/glaze.bin` with `--rtc-host-time --ne2000`, open App Store, and install an app.
+glaze-os's `out/glaze.bin` with `--rtc-host-time --ne2000`, open App Store, and install an app.
 Use the usual build for release, without `APPSTORE_URL` overrides or scripted
 input. A correct device date and compatible bundled trust roots are required.
 

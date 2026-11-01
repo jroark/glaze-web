@@ -11,13 +11,14 @@ python3 -m http.server --directory site 8000
 ## Images
 
 Everything on the device screens is a real Glaze screenshot. `tools/mksite.py`
-builds `site/img` from the final screens of scripted runs (`tests/run.sh`
-writes `out/shots/<name>.png`); its header lists the runs to capture. It also
+builds `site/img` from the final screens of scripted runs (glaze-os's `tests/run.sh`
+writes `out/shots/<name>.png` there); its header lists the runs to capture.
+Test paths in the table below are in glaze-os unless they name another repository. It also
 needs the device frame artwork from the be300 repository
 (`src/ui/assets/be300_frame.png`), and Pillow:
 
 ```
-tools/mksite.py out/shots ../be300/src/ui/assets/be300_frame.png
+tools/mksite.py ../glaze-os/out/shots ../be300/src/ui/assets/be300_frame.png
 ```
 
 The hero's lock screen is split into layers so the page can move the knob:
@@ -181,6 +182,9 @@ existing one. See [WL54CF.md](hardware/WL54CF.md) for licensing and provenance.
 To reproduce the release from the advertised source revision (currently
 `e4500c1204252cdf37bc8dfd86e8e678bc7b641a`):
 
+Run these in the glaze-os checkout (the release is built and packaged there, into
+this repository's `site/downloads`):
+
 ```sh
 python3 tools/fetch_wl54cf_firmware.py
 # Force romfs regeneration when switching firmware build options.
@@ -194,15 +198,16 @@ make -C host mkfsimg
 out/host/mkfsimg userdata 704 out/public-release/fs.img
 python3 tools/mk_nand.py --kernel out/kernel.elf --spl out/spl.elf \
   --romfs out/romfs.img --fs-image out/public-release/fs.img --out out/public-release/glaze.bin
-python3 tools/package_glazeboot.py --build-dir out/public-release \
+python3 tools/package_glazeboot.py --build-dir out/public-release --site-dir ../glaze-web/site \
   --revision e4500c1204252cdf37bc8dfd86e8e678bc7b641a --date 2026-10-25
-python3 tests/site_release.py
+# then, in glaze-web:
+make test
 ```
 
 The fetcher, firmware manifest/license and packaging tool are part of the
 website update. When rebuilding an older advertised OS revision, retain
-`tools/fetch_wl54cf_firmware.py`, `tools/package_glazeboot.py`, `firmware/` and
-these instructions from the release tooling revision separately. `SOURCE.txt`
+glaze-os's `tools/fetch_wl54cf_firmware.py`, `tools/package_glazeboot.py` and `firmware/`,
+and these instructions, from the release tooling revision separately. `SOURCE.txt`
 and `latest.json` link both exact source revisions. Use fresh build output
 for public releases, with no locally imported Windows CE apps or personal
 files. Update the download links and source revision in `site/index.html`

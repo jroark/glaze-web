@@ -12,16 +12,18 @@ from unittest.mock import patch
 from zipfile import ZipFile
 
 ROOT = Path(__file__).resolve().parent.parent
+# GlazeBoot release packaging and its firmware live in the glaze-os checkout.
+GLAZE = Path(__import__('os').environ.get('GLAZE_DIR', ROOT.parent / 'glaze-os')).resolve()
 
 
-def module(name):
-    spec = importlib.util.spec_from_file_location(name, ROOT / 'tools' / (name + '.py'))
+def module(name, root=ROOT):
+    spec = importlib.util.spec_from_file_location(name, root / 'tools' / (name + '.py'))
     result = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(result)
     return result
 
 
-packager = module('package_glazeboot')
+packager = module('package_glazeboot', GLAZE)
 publisher = module('publish_site')
 REVISION = 'e4500c1204252cdf37bc8dfd86e8e678bc7b641a'
 
@@ -52,7 +54,7 @@ class SiteRelease(unittest.TestCase):
         self.build = self.root / 'build'
         self.site = self.root / 'site'
         self.build.mkdir()
-        manifest = packager.firmware_manifest(ROOT)
+        manifest = packager.firmware_manifest(GLAZE)
         for name, data in FIRMWARE.items():
             manifest['files']['libertas/' + Path(name).name] = {
                 'size_bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest()}
@@ -74,7 +76,7 @@ class SiteRelease(unittest.TestCase):
             path.write_text('fixture')
 
     def package(self):
-        return packager.package(self.build, self.site, REVISION, '2026-10-25', ROOT)
+        return packager.package(self.build, self.site, REVISION, '2026-10-25', GLAZE)
 
     def test_archive_checksums_and_private_seed(self):
         release = self.package()
@@ -85,7 +87,7 @@ class SiteRelease(unittest.TestCase):
             self.assertIn('Glaze/GlazeBoot.exe', z.namelist())
             self.assertIn('Emulator/glaze.bin', z.namelist())
             self.assertIn('licenses/firmware/LICENCE.Marvell', z.namelist())
-            self.assertEqual(z.read('licenses/firmware/LICENCE.Marvell'), (ROOT / 'firmware/LICENCE.Marvell').read_bytes())
+            self.assertEqual(z.read('licenses/firmware/LICENCE.Marvell'), (GLAZE / 'firmware/LICENCE.Marvell').read_bytes())
             self.assertEqual(set(release['builtin_apps']), set(packager.BUILTIN_APPS))
             self.assertTrue(release['vendor_firmware_included'])
             self.assertFalse(release['emulator_firmware_included'])
@@ -134,6 +136,12 @@ class SiteRelease(unittest.TestCase):
         release = self.package()
         (self.site / 'downloads' / release['filename']).unlink()
         with self.assertRaisesRegex(SystemExit, 'missing; build it'):
+            publisher.check_site(self.site)
+
+    def test_markdown_never_published(self):
+        self.package()
+        (self.site / 'img' / 'CLAUDE.md').write_text('notes')
+        with self.assertRaisesRegex(SystemExit, 'Markdown'):
             publisher.check_site(self.site)
 
     def installers(self):

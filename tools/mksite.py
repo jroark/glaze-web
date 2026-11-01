@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """Build glaze-os.com's images (site/img) from emulator screenshots.
 
-The screenshots are the final screens of scripted runs (tests/run.sh writes
-out/shots/<name>.png). Capture these, then run this script:
+The screenshots are the final screens of scripted runs of glaze-os's
+tests/run.sh (out/shots/<name>.png in that checkout). Capture these from ../glaze-os:
 
-    tests/run.sh tests/ui/t_site_lock.txt 8
-    tests/run.sh tests/ui/t_site_lockmid.txt 8
-    tests/run.sh tests/ui/t_site_lockdrag.txt 8
+    tests/run.sh ../glaze-web/tests/ui/t_site_lock.txt 8
+    tests/run.sh ../glaze-web/tests/ui/t_site_lockmid.txt 8
+    tests/run.sh ../glaze-web/tests/ui/t_site_lockdrag.txt 8
     tests/run.sh tests/ui/unlock.txt 10
     tests/run.sh tests/ui/notes.txt 16
     tests/run.sh tests/ui/t_photos.txt 15
@@ -18,7 +18,10 @@ out/shots/<name>.png). Capture these, then run this script:
     tools/mkcfimg.sh out/cf.img 16 16 out/pkg/hello.gzp ../glaze-apps/out/pkg/minesweeper.gzp ../glaze-apps/out/pkg/solitaire.gzp
     CF=out/cf.img tests/run.sh ../glaze-apps/tests/ui/t_minesweeper.txt 34
     CF=out/cf.img tests/run.sh ../glaze-apps/tests/ui/t_solitaire.txt 40
-    tools/mksite.py out/shots ../be300/src/ui/assets/be300_frame.png
+
+then run this script from glaze-web:
+
+    tools/mksite.py ../glaze-os/out/shots ../be300/src/ui/assets/be300_frame.png
 
 The hero's lock screen is split into layers so the page can slide its knob:
 the screen with an empty track, the knob, the label and the label's alpha
