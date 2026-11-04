@@ -120,15 +120,16 @@
       <div class="download-card">
         <p class="release-label">November 1, 2026 · build <code>e9490e6</code> · development release</p>
         <h3>Offline USB installers</h3>
+        <p class="download-detail">Windows installer 0.1.2 is a maintenance rebuild with the snapshot completion fix and automatic USB replug recovery. The signed OS build and macOS download are unchanged.</p>
         <p>Install Glaze on your BE-300 over USB, with no CompactFlash card or separate Python, firmware or runtime downloads. Choose apps before installing. Includes offline maintenance to update Glaze and manage apps on an existing installation.</p>
         <div class="actions">
-          <a class="button button-primary" href="downloads/Glaze-Installer-2026-11-01-e9490e6-windows-x64.exe" download>Download for Windows x64</a>
+          <a class="button button-primary" href="downloads/Glaze-Installer-2026-11-02-0.1.2-windows-x64.exe" download>Download for Windows x64</a>
           <a class="button button-primary" href="downloads/Glaze-Installer-2026-11-01-e9490e6-macos-arm64.dmg" download>Download for macOS · Apple Silicon</a>
         </div>
-        <p class="download-detail">24.9 MiB · <a href="downloads/Glaze-Installer-2026-11-01-e9490e6-windows-x64.exe.sha256">Windows SHA-256</a><br>20.9 MiB · <a href="downloads/Glaze-Installer-2026-11-01-e9490e6-macos-arm64.dmg.sha256">macOS SHA-256</a></p>
+        <p class="download-detail">24.9 MiB · <a href="downloads/Glaze-Installer-2026-11-02-0.1.2-windows-x64.exe.sha256">Windows SHA-256</a><br>20.9 MiB · <a href="downloads/Glaze-Installer-2026-11-01-e9490e6-macos-arm64.dmg.sha256">macOS SHA-256</a></p>
         <p>In Windows CE, set <strong>Connections → PC Connect → Connection method: USB</strong>. Connect USB and external power, open the installer, then choose <strong>Install Glaze</strong>. Installation replaces Windows CE; saving a backup and extra CE verification are enabled by default. Windows includes guided USB driver setup.</p>
         <p class="download-detail">Development builds: macOS is ad-hoc signed and not notarized; Intel Macs are not supported. macOS 13 compatibility, clean-machine Gatekeeper behavior, physical Windows USB driver setup, and end-to-end physical installation, restore and maintenance remain unvalidated. Windows bundle checks use Wine.</p>
-        <p class="download-detail"><a href="https://github.com/jroark/glaze-os/blob/e9490e6/installer/README.md">Installer instructions</a> · <a href="https://github.com/jroark/glaze-os/tree/e9490e6">Source for this build</a> · <a href="downloads/installers.json">Release details</a>. No original Windows CE apps or game data are bundled. Optional WL54-CF firmware includes its license and provenance.</p>
+        <p class="download-detail"><a href="https://github.com/jroark/glaze-os/blob/e9490e6/installer/README.md">Installer instructions</a> · <a href="https://github.com/jroark/glaze-os/tree/e9490e6">OS source for this build</a> · <a href="downloads/Glaze-Installer-0.1.2-source.zip">Windows installer source</a> · <a href="downloads/installers.json">Release details</a>. No original Windows CE apps or game data are bundled. Optional WL54-CF firmware includes its license and provenance.</p>
       </div>
       <h3>CompactFlash / emulator ZIP</h3>
       <p class="release-notice"><strong>The ZIP below is the October 25 release.</strong> Newer features described above, including handwriting, Chat, Doom, USB networking, mirroring, the SDK, expanded Web APIs and direct NAND app launching, require a build from <a href="#build">current source</a>. This ZIP has not been rebuilt for the October 29 update.</p>
