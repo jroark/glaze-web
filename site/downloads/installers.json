@@ -7,9 +7,10 @@
   "artifacts": [
     {
       "platform": "windows-x64",
-      "filename": "Glaze-Installer-2026-11-01-e9490e6-windows-x64.exe",
-      "size_bytes": 26067043,
-      "sha256": "b5204eed6a4f7db47e018645a23edf42f76dc53327afb38940b7450cb67fd963"
+      "filename": "Glaze-Installer-2026-11-02-0.1.2-windows-x64.exe",
+      "size_bytes": 26071790,
+      "sha256": "14a916b688b9628f9751630bfd52e6c76cf690de51d91038c278cd9c0879c2ce",
+      "installer_version": "0.1.2"
     },
     {
       "platform": "macos-arm64",
@@ -17,5 +18,13 @@
       "size_bytes": 21867774,
       "sha256": "7bd2bd9a69dfad080fbd75fe135f2a5056e51ae820e751ffe0a19904431e876a"
     }
-  ]
+  ],
+  "installer_source": {
+    "filename": "Glaze-Installer-0.1.2-source.zip",
+    "sha256": "df84110c7b64778a91e57ad21358288418131bee9eef0039462df4c3dcecf89b",
+    "base_revision": "62e8b5b08d92c34217ccbfb993f2cd4845957c39",
+    "shared_usb_source_revision": "71957ca1d61f8ac4a3d474acbff4ad9106c092d6"
+  },
+  "notes": "Windows installer 0.1.2: maintenance rebuild from the standalone installer sources, retaining the snapshot file-sharing fix, USB reconnect prompt and native diagnostics. Signed OS firmware and macOS installer unchanged.",
+  "installer_date": "2026-11-02"
 }
