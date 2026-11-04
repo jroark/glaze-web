@@ -94,5 +94,23 @@
     "developer": "Glaze",
     "summary": "Classic Doom with pocket-sized controls and sound.",
     "description": "Play classic single-player Doom with BE-300 buttons, sound effects and save games. Supply your own compatible Doom, Doom II or Freedoom IWAD in Documents or on a card, then select it in the app. Game data is supplied separately. Requires an updated Glaze OS."
+  },
+  {
+    "id": "tetris",
+    "developer": "Glaze",
+    "summary": "Stack falling blocks and clear the lines.",
+    "description": "Rotate and drop falling pieces to complete lines. Preview the next piece, hold one for later, and follow the ghost to place it precisely. Play with the BE-300 buttons, no stylus needed. Speed rises every ten lines, and your best score is kept. Your game is saved when you go Home."
+  },
+  {
+    "id": "snake",
+    "developer": "Glaze",
+    "summary": "Steer, eat, grow. Don't bite your tail.",
+    "description": "Guide the snake around the board with the arrow buttons, eat to grow longer, and avoid the walls and your own body. The pace picks up every five bites, and your best score is kept. Your game is saved when you go Home."
+  },
+  {
+    "id": "flappy",
+    "developer": "Glaze",
+    "summary": "One button. Endless gaps. How far can you fly?",
+    "description": "Press OK or Up to flap and glide between the pipes. Each pair you pass scores a point, and the scrolling speeds up as you go. Your best score is kept, and your game is saved when you go Home."
   }
 ]
