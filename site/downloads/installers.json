@@ -1,30 +1,30 @@
 {
-  "date": "2026-11-01",
-  "build_id": "e9490e6",
-  "source_revision": "e9490e64100a67f111cd3a04d354c8000c7260cf",
-  "os_version": "1.0",
+  "date": "2026-11-04",
+  "build_id": "4420239",
+  "source_revision": "4420239733a39577777b979446b36796f589073b",
+  "os_version": "1.1",
   "status": "development",
   "artifacts": [
     {
       "platform": "windows-x64",
-      "filename": "Glaze-Installer-2026-11-02-0.1.2-windows-x64.exe",
-      "size_bytes": 26071790,
-      "sha256": "14a916b688b9628f9751630bfd52e6c76cf690de51d91038c278cd9c0879c2ce",
-      "installer_version": "0.1.2"
+      "filename": "Glaze-Installer-2026-11-04-4420239-windows-x64.exe",
+      "size_bytes": 27529512,
+      "sha256": "a0b57d9a389f23a7de776737835a597bc79d278c13846d96469f725eaa428c5f",
+      "installer_version": "0.2.0"
     },
     {
       "platform": "macos-arm64",
-      "filename": "Glaze-Installer-2026-11-01-e9490e6-macos-arm64.dmg",
-      "size_bytes": 21867774,
-      "sha256": "7bd2bd9a69dfad080fbd75fe135f2a5056e51ae820e751ffe0a19904431e876a"
+      "filename": "Glaze-Installer-2026-11-04-4420239-macos-arm64.dmg",
+      "size_bytes": 21566900,
+      "sha256": "768008648b2c04899cafc877285ba21e6ed6e9952d5bd483f87f47e2a68a96cc",
+      "installer_version": "0.2.0"
     }
   ],
   "installer_source": {
-    "filename": "Glaze-Installer-0.1.2-source.zip",
-    "sha256": "df84110c7b64778a91e57ad21358288418131bee9eef0039462df4c3dcecf89b",
-    "base_revision": "62e8b5b08d92c34217ccbfb993f2cd4845957c39",
-    "shared_usb_source_revision": "71957ca1d61f8ac4a3d474acbff4ad9106c092d6"
+    "filename": "Glaze-Installer-0.2.0-source.zip",
+    "sha256": "7a0c70eff5659a958a22ef2c622f9b538205e0017fa8f720317ddf5a2549b260",
+    "base_revision": "e1a0633518ee9e9be5a1164e39c6f845842bbb82"
   },
-  "notes": "Windows installer 0.1.2: maintenance rebuild from the standalone installer sources, retaining the snapshot file-sharing fix, USB reconnect prompt and native diagnostics. Signed OS firmware and macOS installer unchanged.",
-  "installer_date": "2026-11-02"
+  "notes": "Installers 0.2.0 for Glaze OS 1.1, which installs SPL 3. App Store OS updates require SPL 3; installations from the Glaze 1.0 installers have SPL 2 and are not offered them.",
+  "installer_date": "2026-11-04"
 }

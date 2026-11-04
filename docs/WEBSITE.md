@@ -126,6 +126,28 @@ Certificate validation and the CloudFront deployment take several minutes.
 
 ## Publish
 
+### November 4 Glaze OS 1.1 release
+
+Everything published now comes from glaze-os `4420239` (`VERSION` 1.1, SPL 3):
+the installers 0.2.0 (`downloads/installers.json`), the CompactFlash/emulator
+ZIP (`downloads/latest.json`), the App Store's signed `os/glaze-1.1.gzu`, and
+the hosted emulator's Glaze NAND (be300 web release `20261104a`). The App Store
+gained Blocks (`tetris`), Snake and Flappy. The 16 existing apps keep their
+published 1.0 packages: their sources were unchanged, and 1.1 only adds to the
+ABI. Their rebuilds differ only through SDK relinking.
+
+The App Store catalog was built from a staging directory holding the live
+1.0 packages plus the three new ones, rather than with `make store` over every
+`out/pkg`. A plain `make store` would pick up the rebuilt bytes, which the
+publisher rejects for an existing version.
+
+Installer packaging used native Homebrew `cmake`/`pkg-config`
+(`PATH=/opt/homebrew/bin:$PATH`). Intel Homebrew's tools in `/usr/local`
+produce x86_64 helpers linked to a libusb that users don't have.
+
+App Store OS updates require SPL 3. Devices installed from the 1.0 installers
+have SPL 2, so the App Store hides the update from them.
+
 ### November 1 offline installers
 
 The primary downloads are Windows x64 and Apple Silicon macOS offline USB
@@ -180,7 +202,7 @@ use only with Marvell silicon. Both images omit shared Wi-Fi seeds.
 existing one. See [WL54CF.md](hardware/WL54CF.md) for licensing and provenance.
 
 To reproduce the release from the advertised source revision (currently
-`e4500c1204252cdf37bc8dfd86e8e678bc7b641a`):
+`4420239733a39577777b979446b36796f589073b`):
 
 Run these in the glaze-os checkout (the release is built and packaged there, into
 this repository's `site/downloads`):
@@ -188,18 +210,19 @@ this repository's `site/downloads`):
 ```sh
 python3 tools/fetch_wl54cf_firmware.py
 # Force romfs regeneration when switching firmware build options.
-./build.sh all INIT=bin/springboard INPUT_SCRIPT= WL54CF=0 BUILD_ID=e4500c1 -W tools/mkromfs.py
-./build.sh glazeboot INIT=bin/springboard INPUT_SCRIPT= WL54CF=1 GB_APPS=all BUILD_ID=e4500c1
-make glazeboot-exe BE300_DEV=/path/to/be300-dev
+# A separate OUT keeps the firmware-free emulator romfs apart from the default build.
+./build.sh all OUT=out/pub INIT=bin/springboard INPUT_SCRIPT= WL54CF=0 BUILD_ID=4420239
+./build.sh glazeboot OUT=out/pub INIT=bin/springboard INPUT_SCRIPT= WL54CF=1 GB_APPS=all BUILD_ID=4420239
+make glazeboot-exe OUT=out/pub BE300_DEV=/path/to/be300-dev BUILD_ID=4420239
 mkdir -p out/public-release
-cp out/glazeboot/GlazeBoot.exe out/glazeboot/kernel.bin out/glazeboot/romfs.img out/glazeboot/glaze.cfg out/public-release/
+cp out/pub/glazeboot/GlazeBoot.exe out/pub/glazeboot/kernel.bin out/pub/glazeboot/romfs.img out/pub/glazeboot/glaze.cfg out/public-release/
 make -C host mkfsimg
 # A public emulator image must not distribute a shared WPA entropy seed.
 out/host/mkfsimg userdata 704 out/public-release/fs.img
-python3 tools/mk_nand.py --kernel out/kernel.elf --spl out/spl.elf \
-  --romfs out/romfs.img --fs-image out/public-release/fs.img --out out/public-release/glaze.bin
+python3 tools/mk_nand.py --kernel out/pub/kernel.elf --spl out/pub/spl.elf --version 1.1 --build 4420239 \
+  --romfs out/pub/romfs.img --fs-image out/public-release/fs.img --out out/public-release/glaze.bin
 python3 tools/package_glazeboot.py --build-dir out/public-release --site-dir ../glaze-web/site \
-  --revision e4500c1204252cdf37bc8dfd86e8e678bc7b641a --date 2026-10-25
+  --revision 4420239733a39577777b979446b36796f589073b --date 2026-11-04
 # then, in glaze-web:
 make test
 ```

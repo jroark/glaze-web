@@ -64,8 +64,10 @@
 
     <section aria-labelledby="latest">
       <h2 id="latest">New in Glaze</h2>
-      <p class="section-note">Updated <time datetime="2026-10-29">October 29, 2026</time>. These features are in <a href="https://github.com/jroark/glaze-os">current source</a>. The <a href="#download">offline USB installers</a> include these features. The older CompactFlash ZIP predates this update. The hosted emulator may also run an older image.</p>
+      <p class="section-note">Updated <time datetime="2026-11-04">November 4, 2026</time> for Glaze OS 1.1. The <a href="#download">offline USB installers</a>, the CompactFlash ZIP and the <a href="https://linux4be.com/?image=glaze&amp;boot=1&amp;card=none&amp;keyboard=0">hosted emulator</a> all run this release.</p>
       <dl class="group">
+        <div class="row"><dt>CF Bluetooth</dt><dd>With a SMART/Brainboxes Bluetooth CF card, Settings → Bluetooth scans for nearby devices, connects a serial port with a PIN, and streams music, radio and other app audio to an A2DP speaker. The status bar shows when Bluetooth is connected. HID, file transfer and BLE are not supported. <a href="https://github.com/jroark/glaze-os/blob/main/docs/hardware/BLUETOOTH.md">Bluetooth guide.</a></dd></div>
+        <div class="row"><dt>Updates from the App Store</dt><dd>A Glaze installed in NAND can update itself: App Store → Updates downloads the signed OS, verifies it and installs it on restart, keeping your files and settings. Requires the boot loader (SPL 3) included with Glaze OS 1.1 installations. Devices installed with Glaze 1.0 have an older boot loader, so the App Store doesn't offer them updates; replacing it while keeping files currently uses the developer USB procedure. <a href="https://github.com/jroark/glaze-os/blob/main/docs/os/OTA.md">How updates work.</a></dd></div>
         <div class="row"><dt>Handwriting input</dt><dd>Tap <strong>Write</strong> on the keyboard to print one letter or digit at a time, then tap a candidate to insert it. Recognition runs entirely on the device, with a shape guide and Settings practice pad. Switch back to keys whenever you like. <a href="https://github.com/jroark/glaze-os/blob/main/docs/os/HANDWRITING.md">Handwriting guide.</a></dd></div>
         <div class="row"><dt>Browser Web APIs</dt><dd>JerryScript JavaScript, frames and iframes now have asynchronous <code>fetch</code> for GET/POST, URL and UTF-8 tools, origin-scoped local/session storage, more DOM and event APIs, animation callbacks and ES modules. Designed for small web apps within the BE-300's memory; many modern sites still require unsupported APIs. <a href="https://github.com/jroark/glaze-os/blob/main/docs/apps/BROWSER_WEB_APIS.md">Supported Web APIs and limits.</a></dd></div>
         <div class="row"><dt>Launch apps from NAND</dt><dd>After a USB or GlazeBoot RAM boot, open <strong>Files → NAND → ProgramFiles</strong> and select a supported original <code>.exe</code> or <code>.exe.cpk</code>. Glaze recovers matching runtime metadata from your device and keeps the source NAND read-only. <a href="#compatibility">Compatibility and setup.</a></dd></div>
@@ -89,7 +91,7 @@
         <div class="row"><dt>AIM</dt><dd>Messages, buddy lists, online/away status, typing notices, profiles and classic sounds. Connect to a revival or self-hosted OSCAR server; AOL's original service is closed. The session ends when you leave the app. <a href="https://github.com/jroark/glaze-apps/tree/main/packages/aim">AIM app source.</a></dd></div>
         <div class="row"><dt>SomaFM</dt><dd>An unofficial internet radio player with 51 stations, favorites and track metadata. Playback continues after Home while you use other apps. Requires an internet connection through a supported network card or a forwarded USB network link. <a href="https://github.com/jroark/glaze-apps/blob/main/docs/SOMAFM.md">Radio guide.</a></dd></div>
         <div class="row"><dt>Task Manager</dt><dd>Live CPU and memory history, running tasks and threads, plus controls to end other managed apps with confirmation. System services stay protected. <a href="https://github.com/jroark/glaze-os/blob/main/docs/apps/TASK_MANAGER.md">Task monitoring.</a></dd></div>
-        <div class="row"><dt>More to try</dt><dd>Minesweeper, Klondike Solitaire, the Fifteen sliding puzzle, Sketch for drawing, and Hello, a small example app for developers.</dd></div>
+        <div class="row"><dt>More to try</dt><dd>Minesweeper, Klondike Solitaire, Blocks, Snake, Flappy, the Fifteen sliding puzzle, Sketch for drawing, and Hello, a small example app for developers.</dd></div>
       </dl>
     </section>
 
@@ -118,37 +120,36 @@
     <section class="download-section" aria-labelledby="download">
       <h2 id="download">Download Glaze</h2>
       <div class="download-card">
-        <p class="release-label">November 1, 2026 · build <code>e9490e6</code> · development release</p>
+        <p class="release-label">November 4, 2026 · Glaze OS 1.1 · build <code>4420239</code> · development release</p>
         <h3>Offline USB installers</h3>
-        <p class="download-detail">Windows installer 0.1.2 is a maintenance rebuild with the snapshot completion fix and automatic USB replug recovery. The signed OS build and macOS download are unchanged.</p>
+        <p class="download-detail">Installers 0.2.0 install Glaze OS 1.1, including the boot loader needed for App Store updates. Bluetooth, Wi-Fi reconnect, SD-to-CF storage and new optional apps (Blocks, Snake and Flappy) are included.</p>
         <p>Install Glaze on your BE-300 over USB, with no CompactFlash card or separate Python, firmware or runtime downloads. Choose apps before installing. Includes offline maintenance to update Glaze and manage apps on an existing installation.</p>
         <div class="actions">
-          <a class="button button-primary" href="downloads/Glaze-Installer-2026-11-02-0.1.2-windows-x64.exe" download>Download for Windows x64</a>
-          <a class="button button-primary" href="downloads/Glaze-Installer-2026-11-01-e9490e6-macos-arm64.dmg" download>Download for macOS · Apple Silicon</a>
+          <a class="button button-primary" href="downloads/Glaze-Installer-2026-11-04-4420239-windows-x64.exe" download>Download for Windows x64</a>
+          <a class="button button-primary" href="downloads/Glaze-Installer-2026-11-04-4420239-macos-arm64.dmg" download>Download for macOS · Apple Silicon</a>
         </div>
-        <p class="download-detail">24.9 MiB · <a href="downloads/Glaze-Installer-2026-11-02-0.1.2-windows-x64.exe.sha256">Windows SHA-256</a><br>20.9 MiB · <a href="downloads/Glaze-Installer-2026-11-01-e9490e6-macos-arm64.dmg.sha256">macOS SHA-256</a></p>
+        <p class="download-detail">26.3 MiB · <a href="downloads/Glaze-Installer-2026-11-04-4420239-windows-x64.exe.sha256">Windows SHA-256</a><br>20.6 MiB · <a href="downloads/Glaze-Installer-2026-11-04-4420239-macos-arm64.dmg.sha256">macOS SHA-256</a></p>
         <p>In Windows CE, set <strong>Connections → PC Connect → Connection method: USB</strong>. Connect USB and external power, open the installer, then choose <strong>Install Glaze</strong>. Installation replaces Windows CE; saving a backup and extra CE verification are enabled by default. Windows includes guided USB driver setup.</p>
         <p class="download-detail">Development builds: macOS is ad-hoc signed and not notarized; Intel Macs are not supported. macOS 13 compatibility, clean-machine Gatekeeper behavior, physical Windows USB driver setup, and end-to-end physical installation, restore and maintenance remain unvalidated. Windows bundle checks use Wine.</p>
-        <p class="download-detail"><a href="https://github.com/jroark/glaze-os/blob/e9490e6/installer/README.md">Installer instructions</a> · <a href="https://github.com/jroark/glaze-os/tree/e9490e6">OS source for this build</a> · <a href="downloads/Glaze-Installer-0.1.2-source.zip">Windows installer source</a> · <a href="downloads/installers.json">Release details</a>. No original Windows CE apps or game data are bundled. Optional WL54-CF firmware includes its license and provenance.</p>
+        <p class="download-detail"><a href="https://github.com/jroark/glaze-installer/blob/e1a0633518ee9e9be5a1164e39c6f845842bbb82/installer/README.md">Installer instructions</a> · <a href="https://github.com/jroark/glaze-os/tree/4420239733a39577777b979446b36796f589073b">OS source for this build</a> · <a href="downloads/Glaze-Installer-0.2.0-source.zip">Installer source</a> · <a href="downloads/installers.json">Release details</a>. No original Windows CE apps or game data are bundled. Optional WL54-CF firmware includes its license and provenance.</p>
       </div>
       <h3>CompactFlash / emulator ZIP</h3>
-      <p class="release-notice"><strong>The ZIP below is the October 25 release.</strong> Newer features described above, including handwriting, Chat, Doom, USB networking, mirroring, the SDK, expanded Web APIs and direct NAND app launching, require a build from <a href="#build">current source</a>. This ZIP has not been rebuilt for the October 29 update.</p>
       <div class="download-card">
-        <p class="release-label">October 25, 2026 · build <code>e4500c1</code></p>
+        <p class="release-label">November 4, 2026 · Glaze OS 1.1 · build <code>4420239</code></p>
         <h3>Ready for your CompactFlash card</h3>
         <p>The ZIP includes <strong>GlazeBoot.exe</strong>, the matching kernel and system archive with all built-in apps, WL54-CF firmware for physical Marvell chips, boot settings, setup instructions, licenses, and a firmware-free Glaze NAND image for the emulator.</p>
         <div class="actions">
-          <a class="button button-primary" href="downloads/glaze-2026-10-25-e4500c1-full.zip" download>Download Glaze ZIP</a>
-          <a class="button button-plain" href="downloads/glaze-2026-10-25-e4500c1-full.zip.sha256">SHA-256 checksum</a>
+          <a class="button button-primary" href="downloads/glaze-2026-11-04-4420239-full.zip" download>Download Glaze ZIP</a>
+          <a class="button button-plain" href="downloads/glaze-2026-11-04-4420239-full.zip.sha256">SHA-256 checksum</a>
         </div>
-        <p class="download-detail"><a href="https://github.com/jroark/glaze-os/tree/e4500c1204252cdf37bc8dfd86e8e678bc7b641a">Source for this build</a> · <a href="downloads/latest.json">Release details</a> · Marvell firmware license and provenance included. No original Windows CE apps are bundled.</p>
+        <p class="download-detail"><a href="https://github.com/jroark/glaze-os/tree/4420239733a39577777b979446b36796f589073b">Source for this build</a> · <a href="downloads/latest.json">Release details</a> · Marvell firmware license and provenance included. No original Windows CE apps are bundled.</p>
       </div>
       <ol class="group steps download-steps">
         <li class="step"><div><p>Extract the ZIP. Copy its <code>Glaze</code> folder to a FAT-formatted CompactFlash card. The included README explains setup and the optional per-card Wi-Fi seed.</p></div></li>
         <li class="step"><div><p>On the BE-300 in Windows CE, open <code>\Storage Card\Glaze\GlazeBoot.exe</code> and choose Boot. The included configuration keeps Windows CE's NAND volume read-only.</p></div></li>
         <li class="step"><div><p>Glaze runs from RAM: files and settings in its root filesystem disappear on reset. Keep files you want on <code>/Card</code>. To return to Windows CE, fully power-cycle the device; the README describes the reset procedure.</p></div></li>
       </ol>
-      <p class="section-note section-followup">All built-in apps are included: Calendar, Photos, Clock, Calculator, Files, Browser, Music, Videos, App Store, Notes and Settings. Install additional apps from the App Store. The WL54-CF firmware is licensed only for use with physical Marvell chips; <a href="https://github.com/jroark/glaze-os/blob/main/docs/WL54CF.md">firmware and build instructions</a>. <a href="https://github.com/jroark/glaze-os/blob/main/docs/dev/GLAZEBOOT.md">Full GlazeBoot guide.</a></p>
+      <p class="section-note section-followup">All built-in apps are included: Calendar, Photos, Clock, Calculator, Files, Browser, Music, Videos, App Store, Notes and Settings. Install additional apps from the App Store. The WL54-CF firmware is licensed only for use with physical Marvell chips; <a href="https://github.com/jroark/glaze-os/blob/main/docs/hardware/WL54CF.md">firmware and build instructions</a>. <a href="https://github.com/jroark/glaze-os/blob/main/docs/dev/GLAZEBOOT.md">Full GlazeBoot guide.</a></p>
     </section>
 
     <section aria-labelledby="screens">
