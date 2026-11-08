@@ -68,6 +68,34 @@ def check_site(directory):
         if not checksum.is_file() or checksum.read_text() != f"{artifact['sha256']}  {path.name}\n":
             raise SystemExit('installer checksum does not match downloads/installers.json')
 
+    for package in hardware_info(directory):
+        path = directory / 'downloads' / package['filename']
+        if not path.is_file():
+            raise SystemExit(f'{path} is missing; build the hardware packages (make hwpkgs) before publishing')
+        data = path.read_bytes()
+        if (len(data) != package['size_bytes'] or hashlib.sha256(data).hexdigest() != package['sha256']
+                or data[:4] != b'GZPK'):
+            raise SystemExit('hardware package does not match downloads/hardware.json')
+        checksum = path.with_name(path.name + '.sha256')
+        if not checksum.is_file() or checksum.read_text() != f"{package['sha256']}  {path.name}\n":
+            raise SystemExit('hardware package checksum does not match downloads/hardware.json')
+
+
+def hardware_info(directory):
+    """Signed hardware-support packages (glaze-os's docs/os/HARDWARE_PACKAGES.md).
+    The WL54-CF firmware package is vendor material, built only by users: never listed."""
+    path = directory / 'downloads/hardware.json'
+    if not path.exists():
+        return []
+    packages = json.loads(path.read_text())['packages']
+    for package in packages:
+        name = package['filename']
+        if Path(name).name != name or not name.endswith('.gzp') or not name.startswith('hw-'):
+            raise SystemExit('hardware package filename must be an hw-*.gzp basename')
+        if not package.get('signed') or 'wl54cf' in name:
+            raise SystemExit('only signed hardware packages may be published; never firmware')
+    return packages
+
 
 def installer_info(directory):
     path = directory / 'downloads/installers.json'
@@ -174,6 +202,18 @@ def verify(site_url, bucket, directory):
     if installer_info(directory):
         status, _, body = fetch(site_url + '/downloads/installers.json')
         expect(status == 200 and body == (directory / 'downloads/installers.json').read_bytes(), 'installer metadata matches')
+    for package in hardware_info(directory):
+        name = package['filename']
+        status, headers, body = fetch(site_url + '/downloads/' + name)
+        expect(status == 200 and len(body) == package['size_bytes'] and
+               hashlib.sha256(body).hexdigest() == package['sha256'], name + ' matches its checksum')
+        expect(headers.get('Content-Type', '').split(';')[0] in ('application/octet-stream', 'binary/octet-stream'),
+               name + ' is served as binary')
+        status, _, body = fetch(site_url + '/downloads/' + name + '.sha256')
+        expect(status == 200 and body == (directory / 'downloads' / (name + '.sha256')).read_bytes(), name + ' published checksum matches')
+    if hardware_info(directory):
+        status, _, body = fetch(site_url + '/downloads/hardware.json')
+        expect(status == 200 and body == (directory / 'downloads/hardware.json').read_bytes(), 'hardware package metadata matches')
     if failures:
         raise SystemExit(f'{len(failures)} check(s) failed; if DNS or the invalidation is still propagating, '
                          'rerun with --verify-only')

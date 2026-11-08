@@ -189,6 +189,51 @@ class SiteRelease(unittest.TestCase):
         with self.assertRaisesRegex(SystemExit, 'basename'):
             publisher.check_site(self.site)
 
+    def hardware(self):
+        downloads = self.site / 'downloads'
+        downloads.mkdir(exist_ok=True)
+        packages = []
+        for ident in ('hw-pccards', 'hw-modem'):
+            name = ident + '-1.3.gzp'
+            data = b'GZPK' + ident.encode()
+            digest = hashlib.sha256(data).hexdigest()
+            (downloads / name).write_bytes(data)
+            (downloads / (name + '.sha256')).write_text(f'{digest}  {name}\n')
+            packages.append(dict(id=ident, filename=name, size_bytes=len(data), sha256=digest, signed=True))
+        (downloads / 'hardware.json').write_text(json.dumps({'os_version': '1.3', 'packages': packages}))
+        return packages
+
+    def test_hardware_package_integrity_before_publish(self):
+        packages = self.hardware()
+        publisher.check_site(self.site)
+        path = self.site / 'downloads' / packages[0]['filename']
+        original = path.read_bytes()
+        path.write_bytes(original + b'x')
+        with self.assertRaisesRegex(SystemExit, 'hardware package does not match'):
+            publisher.check_site(self.site)
+        path.write_bytes(b'XXXX' + original[4:])
+        with self.assertRaisesRegex(SystemExit, 'hardware package does not match'):
+            publisher.check_site(self.site)
+        path.unlink()
+        with self.assertRaisesRegex(SystemExit, 'make hwpkgs'):
+            publisher.check_site(self.site)
+        path.write_bytes(original)
+        path.with_name(path.name + '.sha256').write_text('wrong')
+        with self.assertRaisesRegex(SystemExit, 'hardware package checksum'):
+            publisher.check_site(self.site)
+
+    def test_hardware_metadata_rejects_paths_unsigned_and_firmware(self):
+        packages = self.hardware()
+        metadata = self.site / 'downloads/hardware.json'
+        for change, message in [(dict(filename='../hw-escape.gzp'), 'basename'),
+                                (dict(filename='hw-pccards.zip'), 'basename'),
+                                (dict(signed=False), 'only signed'),
+                                (dict(filename='hw-wl54cf-1.3.gzp'), 'never firmware')]:
+            with self.subTest(change=change):
+                metadata.write_text(json.dumps({'packages': [dict(packages[0], **change)]}))
+                with self.assertRaisesRegex(SystemExit, message):
+                    publisher.check_site(self.site)
+
     def test_old_releases_are_preserved_and_html_is_last(self):
         self.package()
         self.installers()

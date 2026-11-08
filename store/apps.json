@@ -112,5 +112,41 @@
     "developer": "Glaze",
     "summary": "One button. Endless gaps. How far can you fly?",
     "description": "Press OK or Up to flap and glide between the pipes. Each pair you pass scores a point, and the scrolling speeds up as you go. Your best score is kept, and your game is saved when you go Home."
+  },
+  {
+    "id": "maps",
+    "developer": "Glaze",
+    "summary": "Offline maps that know where you are.",
+    "description": "Follow your position on offline map packs with a CompactFlash GPS receiver. Drag to pan, double-tap or use + and - to zoom, and tap Locate to follow again. The GPS page shows your fix and every satellite. Record keeps a track in the background and saves it as GPX. Put .gzmap packs in /Maps or /Card/Maps."
+  },
+  {
+    "id": "chess",
+    "developer": "Glaze",
+    "summary": "A full game of chess against a pocket engine.",
+    "description": "Play White against a compact chess engine at Weak, Normal or Strong. Tap a piece and then its square, or use the arrow keys and OK. Legal moves are marked, the last move is tinted and a king in check glows red. Castling, en passant and promotion are all here. Your game is saved when you go Home."
+  },
+  {
+    "id": "twixt",
+    "developer": "Glaze",
+    "summary": "Pegs and links. Bridge the board before the computer does.",
+    "description": "Place pegs to link the top and bottom of the board while the computer races left to right. Each peg builds every knight-move link it has earned, and links can never cross. Tap near a dot or use the arrow keys and OK. Undo, three strengths and a saved game are always a pause away."
+  },
+  {
+    "id": "breakout",
+    "developer": "Glaze",
+    "summary": "Paddle, ball and a wall of bricks.",
+    "description": "Slide the paddle with a finger or the arrow keys and keep the ball in play. Nine levels cycle through five layouts, with tough orange bricks and steel that never breaks. Where the ball meets the paddle sets its angle, and it speeds up as you go. Your best score is kept, and your game is saved when you go Home."
+  },
+  {
+    "id": "sky1942",
+    "developer": "Glaze",
+    "summary": "Fly through wave after wave of enemy planes.",
+    "description": "Steer with the arrows or a finger and your wing guns fire on their own. Weaving fighters, fast divers and heavy bombers come in waves, each one faster than the last. Three lives, a wave bonus and a best score to beat. Your game is saved when you go Home."
+  },
+  {
+    "id": "pacman",
+    "developer": "Glaze",
+    "summary": "Clear the maze before the ghosts catch you.",
+    "description": "Steer with the arrow keys or a swipe and eat every pellet in the maze. Four ghosts hunt you, each in its own way. Grab a power pellet to turn the tables, chase down fruit for bonus points and slip through the tunnel to escape. Your best score is kept, and your game is saved when you go Home."
   }
 ]
