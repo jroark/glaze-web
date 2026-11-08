@@ -52,6 +52,12 @@ publisher verified all public assets and cache headers and confirmed the
 S3 origin remains private. Hello stays available as a local test package;
 older published assets are retained for cached catalogs.
 
+Glaze OS 1.3 (`os/glaze-1.3.gzu`, build `d83c1e0`, SPL 3 or later) and six
+apps were published on November 7, 2026: Maps, Chess, TwixT, Breakout, Sky
+Raid (`sky1942`) and Muncher (`pacman`). The store now lists 25 apps; the other
+19 kept their catalog records and package/icon bytes. See
+[WEBSITE.md](WEBSITE.md) for how the catalog was staged.
+
 ## Create or update the stack
 
 The working CLI login for the initial setup is the `linux4be` profile. Specify

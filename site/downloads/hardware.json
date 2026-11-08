@@ -1,0 +1,32 @@
+{
+  "date": "2026-11-07",
+  "os_version": "1.3",
+  "build_id": "d83c1e0",
+  "source_revision": "d83c1e0ba977a0636a909a9c0f8b7ce2cf954440",
+  "packages": [
+    {
+      "id": "hw-pccards",
+      "name": "PC Card Drivers",
+      "filename": "hw-pccards-1.3.gzp",
+      "size_bytes": 17564,
+      "sha256": "d4a5979d707b0cb075ae743f8dad59ef91f3a3ac261a6679e14124aab6e51d36",
+      "signed": true,
+      "files": [
+        "drivers/3c589.ko",
+        "drivers/hermes.ko"
+      ]
+    },
+    {
+      "id": "hw-modem",
+      "name": "Dial-up Modem",
+      "filename": "hw-modem-1.3.gzp",
+      "size_bytes": 320244,
+      "sha256": "ce8f8559ed31dc500895624d27de03e99ac5412937474d5cc07d03c641054a42",
+      "signed": true,
+      "files": [
+        "bin/net"
+      ]
+    }
+  ],
+  "notes": "Signed for Glaze OS 1.3 only. Install from Files on the device (flash only); remove under Settings > About > Hardware Support. The WL54-CF firmware package is not distributed."
+}

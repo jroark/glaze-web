@@ -64,10 +64,16 @@
 
     <section aria-labelledby="latest">
       <h2 id="latest">New in Glaze</h2>
-      <p class="section-note">Updated <time datetime="2026-11-04">November 4, 2026</time> for Glaze OS 1.1. The <a href="#download">offline USB installers</a>, the CompactFlash ZIP and the <a href="https://linux4be.com/?image=glaze&amp;boot=1&amp;card=none&amp;keyboard=0">hosted emulator</a> all run this release.</p>
+      <p class="section-note">Updated <time datetime="2026-11-07">November 7, 2026</time> for Glaze OS 1.3. The <a href="#download">offline USB installers</a> and the CompactFlash ZIP run this release, and NAND installations from 1.1 on can update from the App Store. The <a href="https://linux4be.com/?image=glaze&amp;boot=1&amp;card=none&amp;keyboard=0">hosted emulator</a> still runs Glaze OS 1.1.</p>
       <dl class="group">
+        <div class="row"><dt>Pages and folders</dt><dd>Hold an icon until the home screen jiggles, then drag it to another page, into or out of the toolbar, or onto another icon to make a folder. Tap a folder's title to rename it. Your layout is saved when you finish editing.</dd></div>
+        <div class="row"><dt>GPS and Maps</dt><dd>An AmbiCom GPS-CF or similar SiRF CompactFlash receiver works with no driver to install. The new Maps app shows your position on offline map packs, lists the satellites in view and records tracks as GPX. Build map packs on a computer with glaze-os's <code>tools/mkmaptiles.py</code>. <a href="https://github.com/jroark/glaze-os/blob/main/docs/hardware/GPS.md">GPS guide.</a></dd></div>
+        <div class="row"><dt>Hardware packages</dt><dd>PC Card drivers (3Com 3c589 Ethernet and Lucent/Orinoco Wi-Fi in a PCMCIA jacket) and dial-up over a CompactFlash modem now install as signed packages from Files, with no rebuild and without giving up built-in apps. Manage them in Settings → About → Hardware Support. <a href="#hardware-packages">Download them below.</a> <a href="https://github.com/jroark/glaze-os/blob/main/docs/os/HARDWARE_PACKAGES.md">How hardware packages work.</a></dd></div>
+        <div class="row"><dt>Targus keyboard</dt><dd>The Targus/Stowaway dock keyboard works on a real BE-300. Attach and detach it at any time; Fn gives Home, End, Page Up and Page Down.</dd></div>
+        <div class="row"><dt>Longer battery life</dt><dd>A WL54-CF card uses 802.11 power saving when idle, Wi-Fi turns off when there is nothing to join, and network cards are powered down while the BE-300 sleeps. Settings → Battery shows the card's power use. <a href="https://github.com/jroark/glaze-os/blob/main/docs/hardware/POWER.md">Power guide.</a></dd></div>
+        <div class="row"><dt>More room in flash</dt><dd>The system archive is now compressed, so Glaze OS 1.3 fits the Windows CE app, WL54-CF firmware and every built-in app in NAND at once.</dd></div>
         <div class="row"><dt>CF Bluetooth</dt><dd>With a SMART/Brainboxes Bluetooth CF card, Settings → Bluetooth scans for nearby devices, connects a serial port with a PIN, and streams music, radio and other app audio to an A2DP speaker. The status bar shows when Bluetooth is connected. HID, file transfer and BLE are not supported. <a href="https://github.com/jroark/glaze-os/blob/main/docs/hardware/BLUETOOTH.md">Bluetooth guide.</a></dd></div>
-        <div class="row"><dt>Updates from the App Store</dt><dd>A Glaze installed in NAND can update itself: App Store → Updates downloads the signed OS, verifies it and installs it on restart, keeping your files and settings. Requires the boot loader (SPL 3) included with Glaze OS 1.1 installations. Devices installed with Glaze 1.0 have an older boot loader, so the App Store doesn't offer them updates; replacing it while keeping files currently uses the developer USB procedure. <a href="https://github.com/jroark/glaze-os/blob/main/docs/os/OTA.md">How updates work.</a></dd></div>
+        <div class="row"><dt>Updates from the App Store</dt><dd>A Glaze installed in NAND can update itself: App Store → Updates downloads the signed OS, verifies it and installs it on restart, keeping your files and settings. Requires the boot loader (SPL 3) included with installations of Glaze OS 1.1 and later. Devices installed with Glaze 1.0 have an older boot loader, so the App Store doesn't offer them updates; replacing it while keeping files currently uses the developer USB procedure. <a href="https://github.com/jroark/glaze-os/blob/main/docs/os/OTA.md">How updates work.</a></dd></div>
         <div class="row"><dt>Handwriting input</dt><dd>Tap <strong>Write</strong> on the keyboard to print one letter or digit at a time, then tap a candidate to insert it. Recognition runs entirely on the device, with a shape guide and Settings practice pad. Switch back to keys whenever you like. <a href="https://github.com/jroark/glaze-os/blob/main/docs/os/HANDWRITING.md">Handwriting guide.</a></dd></div>
         <div class="row"><dt>Browser Web APIs</dt><dd>JerryScript JavaScript, frames and iframes now have asynchronous <code>fetch</code> for GET/POST, URL and UTF-8 tools, origin-scoped local/session storage, more DOM and event APIs, animation callbacks and ES modules. Designed for small web apps within the BE-300's memory; many modern sites still require unsupported APIs. <a href="https://github.com/jroark/glaze-os/blob/main/docs/apps/BROWSER_WEB_APIS.md">Supported Web APIs and limits.</a></dd></div>
         <div class="row"><dt>Launch apps from NAND</dt><dd>After a USB or GlazeBoot RAM boot, open <strong>Files → NAND → ProgramFiles</strong> and select a supported original <code>.exe</code> or <code>.exe.cpk</code>. Glaze recovers matching runtime metadata from your device and keeps the source NAND read-only. <a href="#compatibility">Compatibility and setup.</a></dd></div>
@@ -91,7 +97,9 @@
         <div class="row"><dt>AIM</dt><dd>Messages, buddy lists, online/away status, typing notices, profiles and classic sounds. Connect to a revival or self-hosted OSCAR server; AOL's original service is closed. The session ends when you leave the app. <a href="https://github.com/jroark/glaze-apps/tree/main/packages/aim">AIM app source.</a></dd></div>
         <div class="row"><dt>SomaFM</dt><dd>An unofficial internet radio player with 51 stations, favorites and track metadata. Playback continues after Home while you use other apps. Requires an internet connection through a supported network card or a forwarded USB network link. <a href="https://github.com/jroark/glaze-apps/blob/main/docs/SOMAFM.md">Radio guide.</a></dd></div>
         <div class="row"><dt>Task Manager</dt><dd>Live CPU and memory history, running tasks and threads, plus controls to end other managed apps with confirmation. System services stay protected. <a href="https://github.com/jroark/glaze-os/blob/main/docs/apps/TASK_MANAGER.md">Task monitoring.</a></dd></div>
-        <div class="row"><dt>More to try</dt><dd>Minesweeper, Klondike Solitaire, Blocks, Snake, Flappy, the Fifteen sliding puzzle, Sketch for drawing, and Hello, a small example app for developers.</dd></div>
+        <div class="row"><dt>Maps</dt><dd>Your position from a CompactFlash GPS receiver on offline map packs, with a satellite view and GPX track recording. <a href="https://github.com/jroark/glaze-apps/blob/main/docs/MAPS.md">Maps guide.</a></dd></div>
+        <div class="row"><dt>Chess and TwixT</dt><dd>Play White against a compact chess engine, or race the computer to bridge the board in TwixT, each at three strengths and saved when you go Home.</dd></div>
+        <div class="row"><dt>More to try</dt><dd>Minesweeper, Klondike Solitaire, Blocks, Snake, Flappy, Breakout, the Sky Raid shooter, the Muncher maze chase, the Fifteen sliding puzzle, Sketch for drawing, and Hello, a small example app for developers.</dd></div>
       </dl>
     </section>
 
@@ -113,6 +121,9 @@
         <div class="row"><dt>Ethernet</dt><dd>An AmbiCom AMB8610 NE2000 card obtains DHCP and loads HTTPS pages and App Store downloads. SomaFM streams through the same network stack.</dd></div>
         <div class="row"><dt>XI-825 Wi-Fi</dt><dd>A Z-Com XI-825 with station firmware 1.3.5 scans and joins an open network, obtains DHCP and loads network content. WEP support is implemented and emulator-tested; secured-network interoperability on physical cards still needs validation.</dd></div>
         <div class="row"><dt>WL54-CF Wi-Fi</dt><dd>A native driver supports Marvell CF8385 cards, with open, WEP, WPA and WPA2 Personal paths tested in the emulator. Physical-card bring-up is in progress. The hardware ZIP includes unmodified Linux CF8385 firmware under its Marvell license. Interoperability of this firmware pair on physical cards still needs validation.</dd></div>
+        <div class="row"><dt>GPS</dt><dd>An AmbiCom GPS-CF streams NMEA at 4800 baud, and Maps shows the receiver and satellites in view. A position fix on the device has not been recorded yet.</dd></div>
+        <div class="row"><dt>PC Cards and modem</dt><dd>3Com 3c589, Lucent/Orinoco and NE2000 PC Cards work through a PCMCIA jacket. A CompactFlash modem answers its AT probe and dials; a full PPP session over a phone line is tested only in the emulator.</dd></div>
+        <div class="row"><dt>Targus keyboard</dt><dd>The dock keyboard's handshake, live attach and detach, and its full key map work on the device.</dd></div>
         <div class="row"><dt>Headphones and volume</dt><dd>Settings tones and music play through the headphone jack. Changing the volume while music plays is confirmed working. The device's internal piezo buzzer uses a separate controller and is outside this PCM audio driver.</dd></div>
       </dl>
     </section>
@@ -120,29 +131,29 @@
     <section class="download-section" aria-labelledby="download">
       <h2 id="download">Download Glaze</h2>
       <div class="download-card">
-        <p class="release-label">November 4, 2026 · Glaze OS 1.1 · build <code>4420239</code> · development release</p>
+        <p class="release-label">November 7, 2026 · Glaze OS 1.3 · build <code>d83c1e0</code> · development release</p>
         <h3>Offline USB installers</h3>
-        <p class="download-detail">Installers 0.2.0 install Glaze OS 1.1, including the boot loader needed for App Store updates. Bluetooth, Wi-Fi reconnect, SD-to-CF storage and new optional apps (Blocks, Snake and Flappy) are included.</p>
+        <p class="download-detail">Installers 0.3.0 install Glaze OS 1.3, including the boot loader needed for App Store updates. Windows CE compatibility and the WL54-CF firmware now fit alongside every built-in app, and the optional apps add Maps, Chess, TwixT, Breakout, Sky Raid and Muncher.</p>
         <p>Install Glaze on your BE-300 over USB, with no CompactFlash card or separate Python, firmware or runtime downloads. Choose apps before installing. Includes offline maintenance to update Glaze and manage apps on an existing installation.</p>
         <div class="actions">
-          <a class="button button-primary" href="downloads/Glaze-Installer-2026-11-04-4420239-windows-x64.exe" download>Download for Windows x64</a>
-          <a class="button button-primary" href="downloads/Glaze-Installer-2026-11-04-4420239-macos-arm64.dmg" download>Download for macOS · Apple Silicon</a>
+          <a class="button button-primary" href="downloads/Glaze-Installer-2026-11-07-d83c1e0-windows-x64.exe" download>Download for Windows x64</a>
+          <a class="button button-primary" href="downloads/Glaze-Installer-2026-11-07-d83c1e0-macos-arm64.dmg" download>Download for macOS · Apple Silicon</a>
         </div>
-        <p class="download-detail">26.3 MiB · <a href="downloads/Glaze-Installer-2026-11-04-4420239-windows-x64.exe.sha256">Windows SHA-256</a><br>20.6 MiB · <a href="downloads/Glaze-Installer-2026-11-04-4420239-macos-arm64.dmg.sha256">macOS SHA-256</a></p>
+        <p class="download-detail">27.5 MiB · <a href="downloads/Glaze-Installer-2026-11-07-d83c1e0-windows-x64.exe.sha256">Windows SHA-256</a><br>21.2 MiB · <a href="downloads/Glaze-Installer-2026-11-07-d83c1e0-macos-arm64.dmg.sha256">macOS SHA-256</a></p>
         <p>In Windows CE, set <strong>Connections → PC Connect → Connection method: USB</strong>. Connect USB and external power, open the installer, then choose <strong>Install Glaze</strong>. Installation replaces Windows CE; saving a backup and extra CE verification are enabled by default. Windows includes guided USB driver setup.</p>
-        <p class="download-detail">Development builds: macOS is ad-hoc signed and not notarized; Intel Macs are not supported. macOS 13 compatibility, clean-machine Gatekeeper behavior, physical Windows USB driver setup, and end-to-end physical installation, restore and maintenance remain unvalidated. Windows bundle checks use Wine.</p>
-        <p class="download-detail"><a href="https://github.com/jroark/glaze-installer/blob/e1a0633518ee9e9be5a1164e39c6f845842bbb82/installer/README.md">Installer instructions</a> · <a href="https://github.com/jroark/glaze-os/tree/4420239733a39577777b979446b36796f589073b">OS source for this build</a> · <a href="downloads/Glaze-Installer-0.2.0-source.zip">Installer source</a> · <a href="downloads/installers.json">Release details</a>. No original Windows CE apps or game data are bundled. Optional WL54-CF firmware includes its license and provenance.</p>
+        <p class="download-detail">Development builds: macOS is ad-hoc signed and not notarized; Intel Macs are not supported. macOS 13 compatibility, clean-machine Gatekeeper behavior, physical Windows USB driver setup, and end-to-end physical installation, restore and maintenance remain unvalidated. The 0.3.0 Windows setup has not yet been checked under Wine.</p>
+        <p class="download-detail"><a href="https://github.com/jroark/glaze-installer/blob/4cad2cae97c501d951863324be62e6852783775c/installer/README.md">Installer instructions</a> · <a href="https://github.com/jroark/glaze-os/tree/d83c1e0ba977a0636a909a9c0f8b7ce2cf954440">OS source for this build</a> · <a href="downloads/Glaze-Installer-0.3.0-source.zip">Installer source</a> · <a href="downloads/installers.json">Release details</a>. No original Windows CE apps or game data are bundled. Optional WL54-CF firmware includes its license and provenance.</p>
       </div>
       <h3>CompactFlash / emulator ZIP</h3>
       <div class="download-card">
-        <p class="release-label">November 4, 2026 · Glaze OS 1.1 · build <code>4420239</code></p>
+        <p class="release-label">November 7, 2026 · Glaze OS 1.3 · build <code>d83c1e0</code></p>
         <h3>Ready for your CompactFlash card</h3>
         <p>The ZIP includes <strong>GlazeBoot.exe</strong>, the matching kernel and system archive with all built-in apps, WL54-CF firmware for physical Marvell chips, boot settings, setup instructions, licenses, and a firmware-free Glaze NAND image for the emulator.</p>
         <div class="actions">
-          <a class="button button-primary" href="downloads/glaze-2026-11-04-4420239-full.zip" download>Download Glaze ZIP</a>
-          <a class="button button-plain" href="downloads/glaze-2026-11-04-4420239-full.zip.sha256">SHA-256 checksum</a>
+          <a class="button button-primary" href="downloads/glaze-2026-11-07-d83c1e0-full.zip" download>Download Glaze ZIP</a>
+          <a class="button button-plain" href="downloads/glaze-2026-11-07-d83c1e0-full.zip.sha256">SHA-256 checksum</a>
         </div>
-        <p class="download-detail"><a href="https://github.com/jroark/glaze-os/tree/4420239733a39577777b979446b36796f589073b">Source for this build</a> · <a href="downloads/latest.json">Release details</a> · Marvell firmware license and provenance included. No original Windows CE apps are bundled.</p>
+        <p class="download-detail"><a href="https://github.com/jroark/glaze-os/tree/d83c1e0ba977a0636a909a9c0f8b7ce2cf954440">Source for this build</a> · <a href="downloads/latest.json">Release details</a> · Marvell firmware license and provenance included. No original Windows CE apps are bundled.</p>
       </div>
       <ol class="group steps download-steps">
         <li class="step"><div><p>Extract the ZIP. Copy its <code>Glaze</code> folder to a FAT-formatted CompactFlash card. The included README explains setup and the optional per-card Wi-Fi seed.</p></div></li>
@@ -150,12 +161,30 @@
         <li class="step"><div><p>Glaze runs from RAM: files and settings in its root filesystem disappear on reset. Keep files you want on <code>/Card</code>. To return to Windows CE, fully power-cycle the device; the README describes the reset procedure.</p></div></li>
       </ol>
       <p class="section-note section-followup">All built-in apps are included: Calendar, Photos, Clock, Calculator, Files, Browser, Music, Videos, App Store, Notes and Settings. Install additional apps from the App Store. The WL54-CF firmware is licensed only for use with physical Marvell chips; <a href="https://github.com/jroark/glaze-os/blob/main/docs/hardware/WL54CF.md">firmware and build instructions</a>. <a href="https://github.com/jroark/glaze-os/blob/main/docs/dev/GLAZEBOOT.md">Full GlazeBoot guide.</a></p>
+      <h3 id="hardware-packages">Hardware packages</h3>
+      <div class="download-card">
+        <p class="release-label">November 7, 2026 · for Glaze OS 1.3 only · build <code>d83c1e0</code></p>
+        <h3>PC Cards and dial-up</h3>
+        <p>Copy a package to your BE-300, open it in Files and install it on the flash. A card that is already inserted starts working as soon as its driver is installed. Remove packages in Settings → About → Hardware Support. They are signed for Glaze OS 1.3 only; after updating to a newer release, install the packages published for it. GlazeBoot from the ZIP already includes both.</p>
+        <div class="actions">
+          <a class="button button-primary" href="downloads/hw-pccards-1.3.gzp" download>PC Card Drivers</a>
+          <a class="button button-primary" href="downloads/hw-modem-1.3.gzp" download>Dial-up Modem</a>
+        </div>
+        <p class="download-detail">PC Card Drivers: 3Com 3c589 and Lucent/Orinoco Wi-Fi through a PCMCIA jacket · 17 KiB · <a href="downloads/hw-pccards-1.3.gzp.sha256">SHA-256</a><br>Dial-up Modem: PPP over a CompactFlash modem, set up in Settings → Dial-up · 313 KiB · <a href="downloads/hw-modem-1.3.gzp.sha256">SHA-256</a></p>
+        <p class="download-detail"><a href="https://github.com/jroark/glaze-os/blob/main/docs/hardware/PCCARDS.md">PC Card guide</a> · <a href="https://github.com/jroark/glaze-os/blob/main/docs/hardware/MODEM.md">Modem guide</a> · <a href="downloads/hardware.json">Release details</a>. WL54-CF firmware is not offered as a package; the installers and the ZIP include it.</p>
+      </div>
     </section>
 
     <section aria-labelledby="screens">
       <h2 id="screens">On the screen</h2>
       <p class="section-note">Every picture here is a screenshot of Glaze running in the BE-300 emulator, shown pixel for pixel at the device's 240 by 320.</p>
       <ul class="gallery">
+        <li><figure><img src="img/home-folders.png" width="240" height="320" alt="The home screen with a Utilities folder open, holding Clock and Photos" loading="lazy"><figcaption><strong>Folders</strong>Drag one icon onto another to make a folder, then name it.</figcaption></figure></li>
+        <li><figure><img src="img/chess.png" width="240" height="320" alt="Chess after 1. e4 Nc6, with White to move" loading="lazy"><figcaption><strong>Chess</strong>From the App Store. Three strengths, by touch or buttons.</figcaption></figure></li>
+        <li><figure><img src="img/twixt.png" width="240" height="320" alt="TwixT at the start of a game, with one red and one black peg on the grid" loading="lazy"><figcaption><strong>TwixT</strong>From the App Store. Bridge the board before the computer does.</figcaption></figure></li>
+        <li><figure><img src="img/breakout.png" width="240" height="320" alt="Breakout with rows of blue bricks, the ball and the paddle" loading="lazy"><figcaption><strong>Breakout</strong>From the App Store. Slide the paddle with a finger.</figcaption></figure></li>
+        <li><figure><img src="img/sky-raid.png" width="240" height="320" alt="Sky Raid, wave 2, with the player's plane firing at enemy fighters over the sea" loading="lazy"><figcaption><strong>Sky Raid</strong>From the App Store. Your guns fire on their own.</figcaption></figure></li>
+        <li><figure><img src="img/muncher.png" width="240" height="320" alt="Muncher's maze with pellets, four ghosts and the yellow muncher" loading="lazy"><figcaption><strong>Muncher</strong>From the App Store. Swipe to steer through the maze.</figcaption></figure></li>
         <li><figure><img src="img/handwriting.png" width="240" height="320" alt="Notes with the offline handwriting pad open, showing a white drawing area, candidate buttons and Keys, Clear, Space and Return controls" loading="lazy"><figcaption><strong>Handwriting</strong>Print a letter, choose a candidate, or switch back to keys.</figcaption></figure></li>
         <li><figure><img src="img/browser-web-apis.png" width="240" height="320" alt="Browser's offline Web APIs demo reporting ready for text and URLs, DOM, animation and modules" loading="lazy"><figcaption><strong>Browser Web APIs</strong>The bundled offline demo exercises URLs, DOM, animation and ES modules.</figcaption></figure></li>
         <li><figure><img src="img/chat.png" width="240" height="320" alt="Chat showing Hello and a reply from a local Codex protocol test server" loading="lazy"><figcaption><strong>Chat · test conversation</strong>The native chat interface, using a local protocol fixture for this capture.</figcaption></figure></li>
@@ -201,7 +230,7 @@
             <div class="row"><dt>Kernel</dt><dd>A small microkernel with synchronous message passing, shared memory, threads and paged virtual memory.</dd></div>
             <div class="row"><dt>Multitasking</dt><dd>Apps share libraries through a dynamic linker. Return to apps through the multitasking bar; background apps can retain their state while threads and drawing are suspended. Radio playback remains with the audio service.</dd></div>
             <div class="row"><dt>Storage</dt><dd>NAND boots use littlefs on a flash translation layer with error correction and bad-block handling. USB and GlazeBoot RAM boots keep the original Windows CE NAND volume available read-only at /NAND. CompactFlash cards appear as /Card.</dd></div>
-            <div class="row"><dt>Text input</dt><dd>Use the on-screen keyboard or offline handwriting pad in apps using Glaze's shared text controls. A Stowaway folding keyboard detected at boot supplies US ASCII physical text input and hides the on-screen panel; live attachment is not supported.</dd></div>
+            <div class="row"><dt>Text input</dt><dd>Use the on-screen keyboard or offline handwriting pad in apps using Glaze's shared text controls. A Targus/Stowaway dock keyboard supplies US ASCII physical text input and hides the on-screen panel; it can be attached and detached at any time.</dd></div>
             <div class="row"><dt>Network</dt><dd>lwIP over NE2000 Ethernet, XI-825 Wi-Fi, WL54-CF Wi-Fi or the USB host link: DHCP, DNS, TCP and UDP. Settings scans and saves Wi-Fi connections; security depends on the card. See the hardware status above. The clock sets itself by NTP.</dd></div>
             <div class="row"><dt>Web</dt><dd>A browser engine of its own, with HTTPS through wolfSSL and bounded JavaScript through JerryScript. Small pages and web apps fit its scope; it is not a full modern desktop browser.</dd></div>
             <div class="row"><dt>Display and touch</dt><dd>Original LCD initialization, five-point touch calibration, physical backlight and LCD contrast controls, and a configurable timeout that returns to the lock screen on wake. <a href="https://github.com/jroark/glaze-os/blob/main/docs/hardware/DISPLAY.md">Display guide.</a></dd></div>

@@ -126,6 +126,58 @@ Certificate validation and the CloudFront deployment take several minutes.
 
 ## Publish
 
+### November 7 Glaze OS 1.3 release
+
+Everything published comes from glaze-os `d83c1e0` (`VERSION` 1.3, SPL 3,
+merged as glaze-os #119):
+
+- the App Store's signed `os/glaze-1.3.gzu`, replacing 1.2 (`ca9dcec`), which was
+  published only as an update
+- the CompactFlash/emulator ZIP (`downloads/latest.json`)
+- installers 0.3.0 (`downloads/installers.json`, glaze-installer `4cad2ca`)
+- the signed hardware packages `hw-pccards-1.3.gzp` and `hw-modem-1.3.gzp`
+  (`downloads/hardware.json`)
+
+The hosted emulator was not redeployed and still runs 1.1; the page says so.
+
+1.3's NAND romfs is LZ4-compressed and is the stock image: no `PCCARDS`, `MODEM`
+or `NAND_DROP`. PC Cards and dial-up come from the hardware packages, and the
+Windows CE app is back in romfs (63% full). Build the NAND with `./build.sh all`
+on its own: with `glazeboot` among the goals, `PCCARDS` and `MODEM` default to 1
+for the whole invocation, and the NAND romfs no longer matches the signed
+update. Installers 0.3.0 needed glaze-installer #6 to read and write the
+compressed romfs.
+
+The App Store gained Maps, Chess, TwixT, Breakout, Sky Raid (`sky1942`) and
+Muncher (`pacman`), for 25 apps. The last two were renamed from their PRs'
+"1942" and "Pac-Man" to original names (glaze-apps #10, #11). As on November
+4, the catalog was built from a staging directory: the 19 live packages,
+fetched and checked against the live catalog, plus the six new ones from
+glaze-apps `9b61c34`. The 19 existing records are byte-identical.
+
+`site/downloads/hardware.json` lists only signed packages; `publish_site.py`
+refuses unsigned ones and anything named for WL54-CF firmware. The package
+binaries, like the ZIP and installers, are ignored by Git.
+
+New images are 240×320 emulator captures from the 1.3 build, copied from
+`tests/run.sh` output without changes:
+
+| Website image | Capture |
+| --- | --- |
+| `img/home-folders.png` | glaze-os `tests/ui/t_home_edit.txt` |
+| `img/chess.png`, `img/twixt.png`, `img/breakout.png`, `img/sky-raid.png`, `img/muncher.png` | glaze-apps `tests/ui/t_<id>.txt`, cut before its first `key esc` so the capture shows play rather than the pause menu; TwixT's install and launch taps adjusted to 1.3's Files and home screen layout |
+
+Validation on November 7:
+- glaze-os `ota-test` and `hwfile-test`; both hardware packages pass
+  `mkhwpkg.py verify` against the release key
+- emulator UI runs of all six new apps on 1.3, with no faults
+- every glaze-installer suite with staged resources
+- the macOS bundle self-check (38 entries) and both GUI smoke modes
+- `make test` here
+
+Not checked: the 0.3.0 Windows setup under Wine (not installed on the build
+machine), and installation, OTA or hardware packages on a physical BE-300.
+
 ### November 4 Glaze OS 1.1 release
 
 Everything published now comes from glaze-os `4420239` (`VERSION` 1.1, SPL 3):
@@ -202,7 +254,7 @@ use only with Marvell silicon. Both images omit shared Wi-Fi seeds.
 existing one. See [WL54CF.md](hardware/WL54CF.md) for licensing and provenance.
 
 To reproduce the release from the advertised source revision (currently
-`4420239733a39577777b979446b36796f589073b`):
+`d83c1e0ba977a0636a909a9c0f8b7ce2cf954440`):
 
 Run these in the glaze-os checkout (the release is built and packaged there, into
 this repository's `site/downloads`):
@@ -211,18 +263,18 @@ this repository's `site/downloads`):
 python3 tools/fetch_wl54cf_firmware.py
 # Force romfs regeneration when switching firmware build options.
 # A separate OUT keeps the firmware-free emulator romfs apart from the default build.
-./build.sh all OUT=out/pub INIT=bin/springboard INPUT_SCRIPT= WL54CF=0 BUILD_ID=4420239
-./build.sh glazeboot OUT=out/pub INIT=bin/springboard INPUT_SCRIPT= WL54CF=1 GB_APPS=all BUILD_ID=4420239
-make glazeboot-exe OUT=out/pub BE300_DEV=/path/to/be300-dev BUILD_ID=4420239
+./build.sh all OUT=out/pub INIT=bin/springboard INPUT_SCRIPT= WL54CF=0 BUILD_ID=d83c1e0
+./build.sh glazeboot OUT=out/pub INIT=bin/springboard INPUT_SCRIPT= WL54CF=1 GB_APPS=all BUILD_ID=d83c1e0
+make glazeboot-exe OUT=out/pub BE300_DEV=/path/to/be300-dev BUILD_ID=d83c1e0
 mkdir -p out/public-release
 cp out/pub/glazeboot/GlazeBoot.exe out/pub/glazeboot/kernel.bin out/pub/glazeboot/romfs.img out/pub/glazeboot/glaze.cfg out/public-release/
 make -C host mkfsimg
 # A public emulator image must not distribute a shared WPA entropy seed.
 out/host/mkfsimg userdata 704 out/public-release/fs.img
-python3 tools/mk_nand.py --kernel out/pub/kernel.elf --spl out/pub/spl.elf --version 1.1 --build 4420239 \
+python3 tools/mk_nand.py --kernel out/pub/kernel.elf --spl out/pub/spl.elf --version 1.3 --build d83c1e0 \
   --romfs out/pub/romfs.img --fs-image out/public-release/fs.img --out out/public-release/glaze.bin
 python3 tools/package_glazeboot.py --build-dir out/public-release --site-dir ../glaze-web/site \
-  --revision 4420239733a39577777b979446b36796f589073b --date 2026-11-04
+  --revision d83c1e0ba977a0636a909a9c0f8b7ce2cf954440 --date 2026-11-07
 # then, in glaze-web:
 make test
 ```

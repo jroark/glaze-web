@@ -1,11 +1,11 @@
 {
-  "date": "2026-11-04",
-  "revision": "4420239733a39577777b979446b36796f589073b",
-  "build_id": "4420239",
-  "filename": "glaze-2026-11-04-4420239-full.zip",
-  "size_bytes": 5090720,
-  "sha256": "e9208c2a05e665e0b566e4822d21ee5ba30908aaff2a9b1659a2c7167a9dd1a5",
-  "source_url": "https://github.com/jroark/glaze-os/archive/4420239733a39577777b979446b36796f589073b.zip",
+  "date": "2026-11-07",
+  "revision": "d83c1e0ba977a0636a909a9c0f8b7ce2cf954440",
+  "build_id": "d83c1e0",
+  "filename": "glaze-2026-11-07-d83c1e0-full.zip",
+  "size_bytes": 5598839,
+  "sha256": "5cd4af39f913abd22a7d700f9f6e10acc5639af8628f5fe774a7b5f336e44472",
+  "source_url": "https://github.com/jroark/glaze-os/archive/d83c1e0ba977a0636a909a9c0f8b7ce2cf954440.zip",
   "vendor_firmware_included": true,
   "shared_wifi_seed_included": false,
   "hardware_firmware_source": {
@@ -27,8 +27,8 @@
     }
   },
   "emulator_firmware_included": false,
-  "release_tools_revision": "4420239733a39577777b979446b36796f589073b",
-  "release_tools_source_url": "https://github.com/jroark/glaze-os/archive/4420239733a39577777b979446b36796f589073b.zip",
+  "release_tools_revision": "d83c1e0ba977a0636a909a9c0f8b7ce2cf954440",
+  "release_tools_source_url": "https://github.com/jroark/glaze-os/archive/d83c1e0ba977a0636a909a9c0f8b7ce2cf954440.zip",
   "builtin_apps": [
     "appstore",
     "browser",
