@@ -28,7 +28,7 @@
     <div class="perf-intro">
       <h1>Glaze vs Windows CE</h1>
       <p class="lede">How Glaze compares with the Windows CE 3.0 the Casio BE-300 shipped with, on the same machine: how long each takes to start, how much of the 16 MiB of RAM it leaves free, and how quickly it opens comparable apps.</p>
-      <p class="hint">Measured in the <a href="https://github.com/jroark/be300">BE-300 emulator</a>, both systems the same way, <time datetime="2026-11-08">November 8, 2026</time>. These are emulator results, not timings from a real BE-300; see <a href="#method">how it was measured</a>.</p>
+      <p class="hint">Measured in the <a href="https://github.com/jroark/be300">BE-300 emulator</a>, both systems the same way, <time datetime="2026-11-08">November 8, 2026</time>. App launches were also measured <a href="#hardware">on a real BE-300</a>; see <a href="#method">how it was measured</a>.</p>
     </div>
 
     <section aria-labelledby="summary">
@@ -227,6 +227,70 @@
       </div>
     </section>
 
+    <section aria-labelledby="hardware">
+      <h2 id="hardware">On a real BE-300</h2>
+      <p class="section-note">The same apps opened the first time on a real BE-300, measured the same way over the sync cable, median of three runs. Glaze takes a median of 55 ms, Windows CE 716 ms: 13&times; sooner. Both systems take about twice as long as in the emulator.</p>
+      <div class="group chart">
+        <ul class="legend" aria-label="Legend">
+          <li><span class="swatch glaze"></span>Glaze</li>
+          <li><span class="swatch wince"></span>Windows CE 3.0 (stock)</li>
+        </ul>
+        <ul class="bars">
+        <li><span class="name">Calculator</span>
+          <div class="pair">
+            <div class="bar-row" title="Glaze Calculator: 49 ms"><span class="bar glaze" style="--v:1.4%"></span><span class="bar-value">49 ms</span></div>
+            <div class="bar-row" title="Windows CE Calculator (calc.exe): 500 ms"><span class="bar wince" style="--v:13.9%"></span><span class="bar-value">500 ms</span></div>
+          </div>
+        </li>
+        <li><span class="name">Notes</span>
+          <div class="pair">
+            <div class="bar-row" title="Glaze Notes: 36 ms"><span class="bar glaze" style="--v:1.0%"></span><span class="bar-value">36 ms</span></div>
+            <div class="bar-row" title="Windows CE Notes (notes.exe): 305 ms"><span class="bar wince" style="--v:8.5%"></span><span class="bar-value">305 ms</span></div>
+          </div>
+        </li>
+        <li><span class="name">Calendar</span>
+          <div class="pair">
+            <div class="bar-row" title="Glaze Calendar: 44 ms"><span class="bar glaze" style="--v:1.2%"></span><span class="bar-value">44 ms</span></div>
+            <div class="bar-row" title="Windows CE Calendar (Calendar.exe): 931 ms"><span class="bar wince" style="--v:25.8%"></span><span class="bar-value">931 ms</span></div>
+          </div>
+        </li>
+        <li><span class="name">Clock</span>
+          <div class="pair">
+            <div class="bar-row" title="Glaze Clock: 73 ms"><span class="bar glaze" style="--v:2.0%"></span><span class="bar-value">73 ms</span></div>
+            <div class="bar-row" title="Windows CE Clock (clock.exe): 403 ms"><span class="bar wince" style="--v:11.2%"></span><span class="bar-value">403 ms</span></div>
+          </div>
+        </li>
+        <li><span class="name">Settings</span>
+          <div class="pair">
+            <div class="bar-row" title="Glaze Settings: 252 ms"><span class="bar glaze" style="--v:7.0%"></span><span class="bar-value">252 ms</span></div>
+            <div class="bar-row" title="Windows CE Settings (ControlPanel.exe): 983 ms"><span class="bar wince" style="--v:27.2%"></span><span class="bar-value">983 ms</span></div>
+          </div>
+        </li>
+        <li><span class="name">Browser</span>
+          <div class="pair">
+            <div class="bar-row" title="Glaze Browser: 61 ms"><span class="bar glaze" style="--v:1.7%"></span><span class="bar-value">61 ms</span></div>
+            <div class="bar-row" title="Windows CE Internet (Internet.exe): 3,609 ms"><span class="bar wince" style="--v:100.0%"></span><span class="bar-value">3,609 ms</span></div>
+          </div>
+        </li>
+        </ul>
+        <p class="chart-note">Here Glaze was started from Windows CE into RAM with GlazeBoot, which keeps its system files and a 6.5 MiB RAM disk in memory, so its free memory isn't comparable and isn't shown. For the same reason the Browser had to restart when it was opened again (51 ms). Windows CE's free memory matched the emulator's: 5,128 KiB at rest. Start-up wasn't timed on the device.</p>
+        <details class="table-view">
+          <summary>Show as a table, with opening again</summary>
+          <table class="data">
+            <thead><tr><th>Milliseconds</th><th>Glaze first</th><th>Windows CE first</th><th>Glaze again</th><th>Windows CE again</th></tr></thead>
+            <tbody>
+              <tr><td>Calculator</td><td>49</td><td>500</td><td>0</td><td>500</td></tr>
+              <tr><td>Notes</td><td>36</td><td>305</td><td>0</td><td>142</td></tr>
+              <tr><td>Calendar</td><td>44</td><td>931</td><td>0</td><td>500</td></tr>
+              <tr><td>Clock</td><td>73</td><td>403</td><td>0</td><td>402</td></tr>
+              <tr><td>Settings</td><td>252</td><td>983</td><td>0</td><td>108</td></tr>
+              <tr><td>Browser</td><td>61</td><td>3,609</td><td>51</td><td>1,342</td></tr>
+            </tbody>
+          </table>
+        </details>
+      </div>
+    </section>
+
     <section aria-labelledby="method">
       <h2 id="method">How it was measured</h2>
       <div class="group chart method">
@@ -235,7 +299,8 @@
           <li><strong>Glaze:</strong> Glaze OS 1.3 (source <a href="https://github.com/jroark/glaze-os/commit/81fc6d1">81fc6d1</a>), measured by <a href="https://github.com/jroark/glaze-os/blob/main/tests/bench.py"><code>tests/bench.py</code></a>: a scripted unlock, then each app tapped on the home screen, opened again after Home. App times run from the tap to the app's first frame.</li>
           <li><strong>Windows CE:</strong> the BE-300's Windows CE 3.0 factory image, measured by <a href="https://github.com/jroark/glaze-os/blob/main/tests/bench_ce.py"><code>tests/bench_ce.py</code></a> with a small probe (<a href="https://github.com/jroark/glaze-os/tree/main/wince/ce_bench"><code>wince/ce_bench</code></a>) that Windows CE starts from a CompactFlash card. It starts each app and times it until the app's window is in front and its message loop answers. Free memory is <code>GlobalMemoryStatus</code>.</li>
           <li><strong>Runs:</strong> every number is the median of three cold boots from a fresh copy of each system's flash. Boot times are wall-clock seconds; everything else is the guest's own clock.</li>
-          <li><strong>Not compared:</strong> waking from sleep, battery life, and anything on a real BE-300.</li>
+          <li><strong>On the device:</strong> a real BE-300 over its USB sync cable. Windows CE ran the same probe from its flash disk; Glaze was started into RAM from Windows CE with GlazeBoot and given the same taps as in the emulator.</li>
+          <li><strong>Not compared:</strong> waking from sleep, battery life, and start-up and memory on the device.</li>
         </ul>
         <p>Details, commands and the raw results are in <a href="https://github.com/jroark/glaze-os/blob/main/docs/os/PERFORMANCE.md">docs/os/PERFORMANCE.md</a>.</p>
       </div>
