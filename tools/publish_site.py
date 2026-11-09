@@ -18,7 +18,7 @@ REGION = 'us-east-1'
 HTML_CACHE = 'no-cache, max-age=0, must-revalidate'
 ASSET_CACHE = 'public, max-age=3600'
 EXCLUDE = ['.*', '*/.*']
-REQUIRED = ['index.html', '404.html', 'style.css', 'unlock.js', 'favicon.png', 'img/frame.webp',
+REQUIRED = ['index.html', 'performance.html', '404.html', 'style.css', 'unlock.js', 'favicon.png', 'img/frame.webp',
             'img/lock.png', 'img/knob.png', 'img/label.png', 'img/label-mask.png', 'img/home.png', 'img/og.png']
 
 

@@ -458,6 +458,91 @@ pre {
 }
 code { font-family: "Vera Sans Mono", Menlo, monospace; font-size: 0.9em; }
 
+/* ---- performance (performance.html) --------------------------------------
+ * Two series, Glaze and Windows CE, validated as a categorical pair (light
+ * surface; the site has no dark mode). Bars start at a square baseline and
+ * end in a 4 px rounding, 2 px apart. */
+
+.perf { --glaze: #2a78d6; --wince: #eb6834; }
+.perf-intro h1 {
+  margin: 40px 0 14px;
+  font-size: 38px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-shadow: 0 1px 0 var(--emboss);
+}
+.perf-intro .lede { max-width: 62ch; }
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+.stat {
+  padding: 16px 18px;
+  background: var(--cell);
+  border: 1px solid var(--cell-border);
+  border-radius: var(--radius);
+  box-shadow: 0 1px 0 var(--emboss);
+}
+.stat h3 { margin: 0 0 8px; font-size: 14px; color: var(--ink-soft); }
+.stat-value { margin: 0; font-size: 30px; font-weight: 700; line-height: 1.15; }
+.stat-compare { margin: 4px 0 0; color: var(--ink-soft); font-size: 14px; }
+.stat-ratio { margin: 10px 0 0; font-size: 14px; font-weight: 700; color: var(--detail); }
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+  margin: 0 0 12px;
+  padding: 0;
+  list-style: none;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+.legend li { display: inline-flex; align-items: center; gap: 6px; }
+.swatch { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+.swatch.glaze, .bar.glaze { background: var(--glaze); }
+.swatch.wince, .bar.wince { background: var(--wince); }
+.chart { padding: 16px 18px; }
+.bars { margin: 0; padding: 0; list-style: none; }
+.bars li {
+  display: grid;
+  grid-template-columns: 9.5em minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  padding: 8px 0;
+  border-top: 1px solid #e3e5e8;
+}
+.bars li:first-child { border-top: 0; }
+.bars .name { font-weight: 700; font-size: 14px; }
+.bars .name small { display: block; font-weight: 400; color: var(--ink-soft); font-size: 12px; }
+.pair { display: grid; gap: 2px; }
+.bar-row { display: flex; align-items: center; gap: 8px; min-height: 18px; }
+/* --v is the value's share of the chart's largest; 80% of the row leaves
+ * room for the value beside the longest bar without squeezing it. */
+.bar {
+  flex: none;
+  height: 14px;
+  width: calc(var(--v) * 0.8);
+  min-width: 2px;
+  border-radius: 0 4px 4px 0;
+}
+.bar-row:hover .bar { filter: brightness(0.9); }
+.bar-value { font-size: 13px; color: var(--ink); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.chart-note { margin: 12px 0 0; font-size: 13px; color: var(--ink-soft); }
+details.table-view { margin-top: 12px; font-size: 14px; }
+details.table-view summary { cursor: pointer; color: var(--detail); }
+.data {
+  width: 100%;
+  margin-top: 10px;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+.data th, .data td { padding: 6px 8px; border-top: 1px solid #d9dbdf; text-align: right; }
+.data th:first-child, .data td:first-child { text-align: left; }
+.data thead th { border-top: 0; color: var(--ink-soft); font-size: 13px; }
+.method ul, .method p { max-width: 74ch; }
+.method li { margin-bottom: 8px; }
+
 /* ---- footer ------------------------------------------------------------- */
 
 footer {
@@ -477,9 +562,12 @@ footer p { max-width: 70ch; margin: 0 0 6px; }
   .hero h1 { font-size: 34px; }
   .device { margin: 0 auto; }
   .columns { grid-template-columns: minmax(0, 1fr); }
+  .stats { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 520px) {
   .row { grid-template-columns: minmax(0, 1fr); gap: 2px; }
   .gallery { grid-template-columns: 240px; justify-content: center; padding-left: 0; }
   .navbar-title { font-size: 18px; }
+  .bars li { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  .perf-intro h1 { font-size: 30px; }
 }
