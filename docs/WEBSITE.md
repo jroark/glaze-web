@@ -312,3 +312,22 @@ distribution and checks the live site:
 - the download ZIP, SHA-256 file and release metadata match the local build
 
 `--verify-only` repeats the checks without uploading.
+
+## Performance page
+
+`site/performance.html` compares Glaze with the BE-300's stock Windows CE 3.0:
+boot time, free memory and app launches, all measured in the emulator. Its
+numbers come from glaze-os's benchmarks (see glaze-os `docs/os/PERFORMANCE.md`,
+"Glaze vs Windows CE"):
+
+```
+tests/bench.py glaze --runs 3         # out/bench/glaze.txt
+tests/bench_ce.py --runs 3            # out/bench/wince.txt
+```
+
+Copy the medians into the page by hand: the stat tiles, each bar's value and
+its `--v` (the value's share of the largest value in that chart, as a
+percentage), and the tables. Update the date, the glaze-os and be300 commits
+in "How it was measured", and the `og:description` ratios. The page uses no
+script and no images; its bar and tile styles are in the performance section
+of `style.css`.

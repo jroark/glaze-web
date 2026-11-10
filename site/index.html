@@ -12,7 +12,7 @@
   <meta name="theme-color" content="#6d84a2">
   <link rel="icon" href="favicon.png" type="image/png">
   <link rel="preload" href="fonts/VeraBd.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="stylesheet" href="style.css?v=20261029">
+  <link rel="stylesheet" href="style.css?v=20261108">
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -60,6 +60,7 @@
       <a href="#compatibility">Windows CE apps</a>
       <a href="#develop">App SDK</a>
       <a href="#download">Download</a>
+      <a href="performance.html">Glaze vs Windows CE</a>
     </nav>
 
     <section aria-labelledby="latest">
@@ -83,7 +84,7 @@
         <div class="row"><dt>Drivers on demand</dt><dd>Network drivers are loadable MIPS modules. With no network card or active USB network link, Glaze leaves the network drivers and service unloaded. Inserting supported hardware starts the needed driver and service; removing it releases resources. <a href="https://github.com/jroark/glaze-os/blob/main/docs/os/DRIVERS_SERVICES.md">Driver and service lifecycle.</a></dd></div>
         <div class="row"><dt>Native app SDK</dt><dd>A relocatable C SDK includes headers, shared libraries, a project generator, package validation, resource tools and examples. Build apps outside the OS checkout, then install and debug them over USB or the network. <a href="#develop">Get started with the SDK.</a></dd></div>
       </dl>
-      <p class="section-note section-followup">For developers: <a href="https://github.com/jroark/glaze-os/blob/main/docs/os/PERFORMANCE.md">rendering and flash benchmarks</a>, <a href="https://github.com/jroark/glaze-os/blob/main/docs/apps/TASK_MANAGER.md">task monitoring</a>, and <a href="https://github.com/jroark/glaze-os/blob/main/tests/bench.py">boot, launch and memory measurements with tests/bench.py</a>.</p>
+      <p class="section-note section-followup"><a href="performance.html">How Glaze compares with the stock Windows CE</a> in boot time, free memory and app launches. For developers: <a href="https://github.com/jroark/glaze-os/blob/main/docs/os/PERFORMANCE.md">rendering and flash benchmarks</a>, <a href="https://github.com/jroark/glaze-os/blob/main/docs/apps/TASK_MANAGER.md">task monitoring</a>, and <a href="https://github.com/jroark/glaze-os/blob/main/tests/bench.py">boot, launch and memory measurements with tests/bench.py</a>.</p>
     </section>
 
     <section aria-labelledby="apps">
